@@ -1,0 +1,701 @@
+/* ============================================================
+   LOOP BREAK — DAILY DRIVER
+   Retro arcade landing page styles
+   ============================================================ */
+
+/* ----- Design tokens (dark, default) ----- */
+:root {
+  --bg:           #0D0E12;
+  --bg-elevated:  #111218;
+  --panel:        #16171D;
+  --panel-hover:  #1C1E26;
+  --accent:       #F45757;       /* >= 6.0:1 on --bg, AA normal text */
+  --accent-glow:  #FF7878;
+  --accent-dim:   #C23C3C;
+  --on-accent:    #0D0E12;       /* foreground on .btn-primary */
+  --success:      #6CCB6C;
+  --text:         #FDF0D5;
+  --text-muted:   #9A917D;
+  --border:       #2A2C35;
+  --border-strong:#3D4050;
+  --shadow-inset-light: rgba(255,255,255,0.08);
+  --shadow-inset-dark:  rgba(0,0,0,0.55);
+  --scanline-opacity: 0.06;
+}
+
+/* ----- Light theme ----- */
+[data-theme="light"] {
+  --bg:           #F4EFE0;
+  --bg-elevated:  #ECE5D2;
+  --panel:        #FFFFFF;
+  --panel-hover:  #FBF7EA;
+  --accent:       #9A2424;       /* >= 7:1 on cream */
+  --accent-glow:  #B83232;
+  --accent-dim:   #7A1F1F;
+  --on-accent:    #FDF0D5;
+  --success:      #2B7A2B;
+  --text:         #1B1B1F;
+  --text-muted:   #4A4636;
+  --border:       #C9C1AA;
+  --border-strong:#9A917D;
+  --shadow-inset-light: rgba(255,255,255,0.8);
+  --shadow-inset-dark:  rgba(0,0,0,0.18);
+  --scanline-opacity: 0;
+}
+
+/* ----- Reset ----- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ----- Accessibility utilities ----- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -64px;
+  z-index: 10000;
+  padding: 12px 16px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  border: 3px solid var(--border-strong);
+  text-decoration: none;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  top: 8px;
+  outline: 2px solid var(--accent-glow);
+  outline-offset: 2px;
+}
+
+main:focus {
+  outline: none;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'VT323', 'Press Start 2P', ui-monospace, monospace;
+  font-size: 22px;
+  line-height: 1.4;
+  color: var(--text);
+  background: var(--bg);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  position: relative;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ----- CRT scanlines overlay (dark only) ----- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, var(--scanline-opacity)) 0,
+    rgba(0, 0, 0, var(--scanline-opacity)) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* Vignette removed: darkening corners hurt text contrast for AT users.
+   The scanline overlay alone supplies enough CRT character. */
+
+/* ----- Typography ----- */
+.pixel,
+h1, h2, h3,
+.nav-brand,
+.btn,
+.feature-icon-text {
+  font-family: 'Press Start 2P', ui-monospace, monospace;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 28px;
+  line-height: 1.4;
+  color: var(--accent);
+  text-shadow: 0 0 4px rgba(255, 82, 82, 0.35);
+}
+
+h2 {
+  font-size: 20px;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+
+h2::before {
+  content: "▶ ";
+  color: var(--accent);
+}
+
+h3 {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+p {
+  margin-bottom: 16px;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--accent-dim);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+a:hover {
+  color: var(--accent-glow);
+  border-bottom-color: var(--accent-glow);
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent-glow);
+  outline-offset: 2px;
+}
+
+summary:focus { outline: none; }
+summary:focus-visible { outline-offset: -2px; }
+
+strong {
+  color: var(--accent);
+  font-weight: normal;
+}
+
+/* ----- Layout ----- */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section {
+  margin-bottom: 56px;
+}
+
+/* ----- Navigation ----- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 2px solid var(--border);
+  padding: 16px 0;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.nav-brand {
+  font-size: 14px;
+  color: var(--accent);
+  text-shadow: 0 0 3px rgba(255, 82, 82, 0.3);
+}
+
+.nav-brand a {
+  color: inherit;
+  border-bottom: none;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--text);
+  border-bottom: none;
+  padding: 8px 12px;
+  border: 2px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.nav-links a[aria-current="page"] {
+  color: var(--accent);
+  border-color: var(--border-strong);
+}
+
+.theme-toggle {
+  background: transparent;
+  border: 2px solid var(--border);
+  color: var(--text);
+  padding: 8px 12px;
+  cursor: pointer;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  transition: all 0.15s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ----- Hero ----- */
+.hero {
+  text-align: center;
+  padding: 56px 24px 48px;
+  margin-bottom: 56px;
+  background:
+    linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg) 100%);
+  border: 2px solid var(--border);
+  border-radius: 2px;
+  position: relative;
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.hero::before { top: -2px; left: -2px; }
+.hero::after  { bottom: -2px; right: -2px; }
+
+.hero .app-icon {
+  width: 128px;
+  height: 128px;
+  border: 4px solid var(--accent);
+  border-radius: 2px;
+  margin: 0 auto 24px;
+  display: block;
+  image-rendering: pixelated;
+  box-shadow: 0 0 12px rgba(255, 82, 82, 0.2);
+}
+
+.hero h1 {
+  margin-bottom: 16px;
+}
+
+.hero .tagline {
+  font-size: 26px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ----- Buttons (chunky pixel bevel) ----- */
+.btn {
+  display: inline-block;
+  padding: 16px 24px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: 3px solid var(--border-strong);
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Press Start 2P', monospace;
+  box-shadow:
+    inset 2px 2px 0 var(--shadow-inset-light),
+    inset -2px -2px 0 var(--shadow-inset-dark),
+    4px 4px 0 rgba(0,0,0,0.4);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, color 0.15s ease;
+}
+
+.btn:hover {
+  color: var(--accent-glow);
+}
+
+.btn:active {
+  transform: translate(2px, 2px);
+  box-shadow:
+    inset -2px -2px 0 var(--shadow-inset-light),
+    inset 2px 2px 0 var(--shadow-inset-dark),
+    2px 2px 0 rgba(0,0,0,0.4);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent-dim);
+}
+
+.btn-primary:hover {
+  background: var(--accent-glow);
+  color: var(--on-accent);
+}
+
+.btn-disabled {
+  cursor: not-allowed;
+  opacity: 0.75;
+  position: relative;
+}
+
+.btn-disabled:hover {
+  color: var(--text);
+}
+
+.btn-disabled:active {
+  transform: none;
+}
+
+.btn-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 7px;
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 3px 6px;
+  border: 2px solid var(--border-strong);
+  letter-spacing: 0.05em;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+  font-family: 'Press Start 2P', monospace;
+  text-transform: uppercase;
+}
+
+/* ----- Feature grid ----- */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.feature-grid.cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.feature-card {
+  background: var(--panel);
+  border: 2px solid var(--border);
+  padding: 24px;
+  border-radius: 2px;
+  position: relative;
+  transition: transform 0.12s ease, border-color 0.12s ease, background-color 0.12s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  background: var(--panel-hover);
+}
+
+.feature-card .icon {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 18px;
+  color: var(--accent);
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.feature-card h3 {
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  color: var(--text-muted);
+  font-size: 20px;
+  line-height: 1.4;
+  margin-bottom: 0;
+}
+
+/* ----- Pixel checklist ----- */
+.pixel-list {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.pixel-list li {
+  background: var(--panel);
+  border: 2px solid var(--border);
+  padding: 12px 16px 12px 48px;
+  position: relative;
+  font-size: 20px;
+  color: var(--text);
+}
+
+.pixel-list li::before {
+  content: "▶";
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+}
+
+/* ----- Contact / callout card ----- */
+.callout {
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-left: 6px solid var(--accent);
+  padding: 20px 24px;
+  margin: 24px 0;
+}
+
+.callout strong {
+  display: block;
+  margin-bottom: 8px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+/* Obfuscated email — visually styled like a link, but not a mailto */
+.email {
+  color: var(--accent);
+  border-bottom: 1px dashed var(--accent-dim);
+  font-family: 'VT323', monospace;
+  user-select: all;
+}
+
+/* ----- FAQ accordion ----- */
+.faq-item {
+  background: var(--panel);
+  border: 2px solid var(--border);
+  margin-bottom: 12px;
+  padding: 0;
+  transition: border-color 0.15s ease;
+}
+
+.faq-item[open],
+.faq-item:hover {
+  border-color: var(--accent);
+}
+
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 16px 56px 16px 20px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  position: relative;
+  user-select: none;
+}
+
+.faq-item summary::-webkit-details-marker { display: none; }
+
+.faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 18px;
+  color: var(--accent);
+  transition: transform 0.2s ease;
+}
+
+.faq-item[open] summary::after {
+  content: "−";
+}
+
+.faq-body {
+  padding: 0 20px 20px;
+  color: var(--text-muted);
+  font-size: 20px;
+  line-height: 1.45;
+}
+
+.faq-body p { margin-bottom: 12px; }
+.faq-body p:last-child { margin-bottom: 0; }
+
+/* ----- Privacy specific ----- */
+.privacy-content h2 { margin-top: 40px; }
+.privacy-content h3 { margin-top: 24px; }
+.privacy-content p,
+.privacy-content li {
+  font-size: 20px;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.privacy-content ul,
+.privacy-content ol {
+  padding-left: 28px;
+  margin-bottom: 16px;
+}
+
+.privacy-content li {
+  margin-bottom: 8px;
+}
+
+.lead {
+  font-size: 24px;
+  color: var(--text);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.last-updated {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  text-transform: uppercase;
+}
+
+/* ----- Footer ----- */
+.footer {
+  border-top: 2px solid var(--border);
+  margin-top: 64px;
+  padding: 32px 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 18px;
+}
+
+.footer a {
+  margin: 0 8px;
+  /* Keep the dashed underline from the base `a` rule — required so
+     links remain distinguishable without relying on color alone. */
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 1024px) {
+  .feature-grid.cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  body { font-size: 20px; }
+  h1 { font-size: 22px; }
+  h2 { font-size: 16px; }
+  h3 { font-size: 12px; }
+
+  .hero { padding: 40px 16px 32px; }
+  .hero .tagline { font-size: 22px; }
+  .hero .app-icon { width: 100px; height: 100px; }
+
+  .feature-grid,
+  .feature-grid.cols-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .btn { padding: 14px 18px; font-size: 10px; }
+
+  .nav-inner { gap: 8px; }
+  .nav-links { gap: 4px; flex-wrap: wrap; justify-content: center; }
+  .nav-links a { padding: 6px 8px; font-size: 9px; }
+}
+
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  body { font-size: 18px; }
+  h1 { font-size: 18px; }
+  .hero h1 { line-height: 1.5; }
+  .hero .tagline { font-size: 20px; }
+  .hero-ctas { flex-direction: column; align-items: stretch; }
+  .btn { width: 100%; text-align: center; }
+  .btn-disabled::after { font-size: 6px; padding: 2px 4px; }
+}
+
+/* ----- Reduced motion ----- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  body::before { display: none; }
+  h1 { text-shadow: none; }
+}
+
+/* ----- Print ----- */
+@media print {
+  body::before { display: none; }
+  .nav, .footer, .theme-toggle, .hero-ctas { display: none; }
+  body { color: #000; background: #fff; }
+  a { color: #000; border-bottom: 1px solid #000; }
+  h1, h2, h3 { color: #000; text-shadow: none; }
+}
+
+/* ----- Forced Colors (Windows High Contrast) ----- */
+@media (forced-colors: active) {
+  body::before { display: none; }
+  h1 { text-shadow: none; }
+  .hero .app-icon { box-shadow: none; }
+  .nav-brand { text-shadow: none; }
+  .btn,
+  .feature-card,
+  .pixel-list li,
+  .callout,
+  .faq-item,
+  .hero {
+    border-color: CanvasText;
+  }
+  .btn-badge {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+    box-shadow: none;
+  }
+  *:focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+}

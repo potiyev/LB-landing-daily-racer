@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | Loop Break — Daily Driver</title>
+  <meta name="description" content="Privacy policy for Loop Break — Daily Driver. No ads, no analytics, no third-party tracking." />
+  <meta name="theme-color" content="#0D0E12" />
+
+  <link rel="icon" type="image/png" href="assets/app-icon.png" />
+  <link rel="apple-touch-icon" href="assets/app-icon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <script src="theme-toggle.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <nav class="nav" aria-label="Primary">
+    <div class="container nav-inner">
+      <div class="nav-brand"><a href="index.html">LOOP BREAK</a></div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="support.html">Support</a></li>
+        <li><a href="privacy.html" aria-current="page">Privacy</a></li>
+      </ul>
+      <button class="theme-toggle" type="button" aria-pressed="false">
+        <span class="theme-toggle-icon" aria-hidden="true">☀</span>
+        <span class="theme-toggle-label">Light mode</span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="container privacy-content" id="main" tabindex="-1">
+
+    <section>
+      <h1 style="font-size: 22px; margin-top: 32px; margin-bottom: 16px;">Privacy Policy</h1>
+      <p class="last-updated">Last updated: 2026-05-23</p>
+      <p class="lead">This policy explains how Loop Break — Daily Driver handles your data on iOS, Android, and the web. The short version: we don't run ads, we don't use analytics, and we don't share your data with anyone.</p>
+    </section>
+
+    <section>
+      <h2>The Simple Version</h2>
+      <p>Loop Break is built privacy-first. We only collect what we absolutely need to make the game work — basically, your nickname and lap times for the global leaderboard. Everything else lives on your device.</p>
+    </section>
+
+    <section>
+      <h2>What We DON'T Collect</h2>
+      <ul class="pixel-list">
+        <li>We don't show ads, so we don't share data with ad networks</li>
+        <li>We don't run any analytics or telemetry SDK</li>
+        <li>We don't track you across apps or websites</li>
+        <li>We don't collect your real name, email, phone number, or address</li>
+        <li>We don't access your contacts, photos, microphone, or precise location</li>
+        <li>We don't sell your data — to anyone, ever</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Online Leaderboards &amp; Profiles</h2>
+      <p>When you submit a time to the global leaderboard, we send the following to our backend (hosted on Supabase, a managed PostgreSQL provider):</p>
+      <ul>
+        <li>Your in-game nickname (you choose this — make it whatever you want)</li>
+        <li>Your lap time and the seed of the daily track you ran</li>
+        <li>Your country code (derived from your device locale, not your IP)</li>
+        <li>An anonymous device identifier we generate locally — not your IDFA or advertising ID</li>
+      </ul>
+      <p>That's it. We don't store your IP address, your email, or any account credentials. If you never play online, none of this leaves your device.</p>
+    </section>
+
+    <section>
+      <h2>What Stays On Your Device</h2>
+      <p>The following data is stored locally on your phone (or your browser) and never leaves it unless you explicitly choose to play online:</p>
+      <ul>
+        <li>Your game progress — Sprint Gauntlet runs, unlocked upgrades, Nitro balance</li>
+        <li>Your settings — audio levels, haptics, control preferences, theme</li>
+        <li>Your local personal-best times</li>
+        <li>Your Game Center / Google Play Games handle (managed by Apple / Google, not us)</li>
+      </ul>
+      <p>Uninstalling the app deletes all of this. There is nothing in the cloud to migrate.</p>
+    </section>
+
+    <section>
+      <h2>Children's Privacy</h2>
+      <p>Loop Break is not directed at children under 13. We don't knowingly collect personal information from children. If you believe a child has submitted data, contact us and we'll remove it.</p>
+    </section>
+
+    <section>
+      <h2>Data Deletion</h2>
+      <p>You can remove your data from our leaderboard at any time. Pick the platform you're on:</p>
+
+      <h3>iOS</h3>
+      <ol>
+        <li>Open Loop Break</li>
+        <li>Tap the Settings (gear) icon</li>
+        <li>Tap "Reset Online Profile"</li>
+        <li>Confirm — your nickname and all submitted times are deleted from the leaderboard</li>
+      </ol>
+      <p>To also delete the app's local data: long-press the Loop Break icon, tap "Remove App", then "Delete App". This wipes everything stored on the device.</p>
+
+      <h3>Android</h3>
+      <ol>
+        <li>Open Loop Break</li>
+        <li>Tap the Settings (gear) icon</li>
+        <li>Tap "Reset Online Profile"</li>
+        <li>Confirm — your nickname and all submitted times are deleted from the leaderboard</li>
+      </ol>
+      <p>To also delete local data: Settings → Apps → Loop Break → Storage → Clear Storage, or uninstall the app.</p>
+
+      <h3>Manual Deletion Request</h3>
+      <p>If you can't access the app for any reason, email us at <span class="email">loopbreak-feedback at pm.me</span> with the subject line "Data Deletion Request" and the nickname you used. We'll remove your records within 30 days.</p>
+    </section>
+
+    <section>
+      <h2>Data Sharing</h2>
+      <p>We do not share, sell, rent, or trade your data with any third party. The only outbound data transfer is to Supabase (our database host), which stores leaderboard records on our behalf. Supabase is bound by its own privacy policy and contracted as a data processor only.</p>
+    </section>
+
+    <section>
+      <h2>What You Can Control</h2>
+      <ul class="pixel-list">
+        <li>Skip online play entirely — the game is fully playable offline</li>
+        <li>Reset your online profile from in-app settings at any time</li>
+        <li>Disable Game Center / Play Games sign-in in your device settings</li>
+        <li>Uninstall the app to wipe all local data</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Changes to This Policy</h2>
+      <p>If we ever update this policy, we'll update the "Last updated" date at the top of this page and post a notice in-app before any material change takes effect. We will never expand our data collection without telling you first.</p>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <div class="callout">
+        <strong>Privacy Questions</strong>
+        <p>Email us at <span class="email">loopbreak-feedback at pm.me</span> — we typically respond within 48 hours.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 Loop Break</p>
+      <nav aria-label="Footer">
+        <a href="index.html">Home</a> ·
+        <a href="support.html">Support</a> ·
+        <span class="email">loopbreak-feedback at pm.me</span>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>
